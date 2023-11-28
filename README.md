@@ -22,7 +22,7 @@ Add the follwing functionalities to this code:
 You will be rated as follow:
 
 #### Coding
-See exercie above
+See exercie above. You can submit your code using a Remix or using this repo
 
 #### Oral
 1. Answer questions regarding the general understanding of blockchain. example:
