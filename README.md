@@ -30,7 +30,7 @@ See exercie above. You can submit your code using a Remix or using this repo
 - How blockchain work
 - Different type of blockchain
 - Consensus algorithm
-- How to interact with a blockchain
+- How to interact with a blockchainx                                                                                                                        
 - How to use metamask
 - Security rules for using a wallet
 and more 

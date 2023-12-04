@@ -17,7 +17,7 @@ contract NFT {
     NFTData[] public NFTs;
 
     // Mapping to store the NFT for a given owner.
-    mapping(address => uint256) public NFTsByOwner;
+    mapping(address => uint256[]) public NFTsByOwner; //To support an erray of addresses
 
     // Here we store the admin address 
     address admin;
@@ -53,11 +53,11 @@ contract NFT {
         require(token.price > 0, "This NFT does not exist");
 
         // Check that the price match
-        require(token.price > msg.value, "Not enough funds sent");
+        require(token.price <= msg.value, "Not enough funds sent");
 
         // If all check passed, now we can update the NFT owner
         token.owner = msg.sender;
-        NFTsByOwner[msg.sender] = token.id; 
+        NFTsByOwner[msg.sender].push(id); 
     }
 
 }
