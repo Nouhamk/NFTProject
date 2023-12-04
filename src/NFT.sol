@@ -11,6 +11,7 @@ contract NFT {
         address owner;
         uint256 id;
         uint256 price;
+        bool onSale;
     }
 
     // This is a list of NFTData
@@ -39,7 +40,8 @@ contract NFT {
             owner: address(0),
             // We set the id of the NFT
             id: NFTs.length,
-            price: newPrice
+            price: newPrice,
+            onSale: false
         }));
     }
         
@@ -58,6 +60,63 @@ contract NFT {
         // If all check passed, now we can update the NFT owner
         token.owner = msg.sender;
         NFTsByOwner[msg.sender].push(id); 
+    }
+
+     // Function to transfer ownership of an NFT to another address
+    function transfer(uint256 id, address recipient) public {
+        // Ensure that the sender is the owner of the NFT
+        require(msg.sender == NFTs[id].owner, "You are not the owner of this NFT");
+
+        // Transfer ownership by updating the owner address
+        NFTs[id].owner = recipient;
+
+        // Update the NFTsByOwner mapping for both sender and recipient
+        updateOwnership(msg.sender, id, recipient);
+    }
+
+    
+    // New function to put an NFT on sale
+    function putOnSale(uint256 id, uint256 salePrice) public {
+        require(msg.sender == NFTs[id].owner, "You are not the owner of this NFT");
+        require(!NFTs[id].onSale, "NFT is already on sale");
+
+        NFTs[id].price = salePrice;
+        NFTs[id].onSale = true;
+    }
+
+    // New function to purchase an NFT that is on sale
+    function purchaseOnSale(uint256 id) public payable {
+        NFTData storage token = NFTs[id];
+        require(token.onSale, "NFT is not on sale");
+        require(token.price > 0, "This NFT does not exist");
+        require(token.price <= msg.value, "Not enough funds sent");
+
+        address previousOwner = token.owner;
+        token.owner = msg.sender;
+        token.onSale = false;
+
+        // Transfer funds to the previous owner
+        payable(previousOwner).transfer(msg.value);
+        
+        // Update NFT ownership mappings
+        updateOwnership(previousOwner, id, msg.sender);
+    }
+
+
+    // Internal function to update the NFTsByOwner mapping
+    function updateOwnership(address from, uint256 id, address to) internal {
+        // Remove the NFT ID from the sender's list
+        uint256[] storage fromNFTs = NFTsByOwner[from];
+        for (uint256 i = 0; i < fromNFTs.length; i++) {
+            if (fromNFTs[i] == id) {
+                fromNFTs[i] = fromNFTs[fromNFTs.length - 1];
+                fromNFTs.pop();
+                break;
+            }
+        }
+
+        // Add the NFT ID to the recipient's list
+        NFTsByOwner[to].push(id);
     }
 
 }

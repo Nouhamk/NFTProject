@@ -39,6 +39,11 @@
 						"internalType": "uint256",
 						"name": "price",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "onSale",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -98,6 +103,55 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "purchaseOnSale",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "salePrice",
+						"type": "uint256"
+					}
+				],
+				"name": "putOnSale",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					}
+				],
+				"name": "transfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -128,11 +182,11 @@
 	},
 	"sources": {
 		"src/NFT.sol": {
-			"keccak256": "0x859118c8fe519228cc8dde9fa3a23bb7d5fb12cf6ee56088484c0a28e2156034",
+			"keccak256": "0x0bf6faa15b2c0875557184dc8e16fbc2cd7b6cde9e25f8583252114c47f4b678",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://af41b061fa1553e68925d2fd23679933a52f7608d02a8daa21160ecd9b482747",
-				"dweb:/ipfs/QmX7ajhgCULAkDBeT5XLECzkk79hNaDTbxBp3oNyCDiYGL"
+				"bzz-raw://97e4d7b40f60758ab1c825724579305c6b4fb36e28856842bf64cf4609c3b84e",
+				"dweb:/ipfs/QmTWjjSaa3BSg1RubsqQAMXEFWD8S8MugCVGiZ7UrSNPja"
 			]
 		}
 	},
