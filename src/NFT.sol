@@ -77,7 +77,7 @@ contract NFT {
     
     // New function to put an NFT on sale
     function putOnSale(uint256 id, uint256 salePrice) public {
-        require(msg.sender == NFTs[id].owner, "You are not the owner of this NFT");
+       // require(msg.sender == NFTs[id].owner, "You are not the owner of this NFT");
         require(!NFTs[id].onSale, "NFT is already on sale");
 
         NFTs[id].price = salePrice;
